@@ -19,7 +19,7 @@ A fast and simple server for your Messenger app built with Bun, TypeScript, Pris
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/julfiker755/health-care-server.git
+   git clone https://github.com/julfiker755/messanger-server.git
    ```
 
 2. **Install dependencies**:
