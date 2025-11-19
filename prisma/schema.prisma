@@ -1,61 +1,14 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  id           String     @id @default(uuid())
-  email        String     @unique
-  password     String
-  status       userStatus @default(ACTIVE)
-  otp_varify   Boolean    @default(false)
-  phone_number String     @unique
-  role         userRole
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  customer     Customer?
-
-  @@map("user")
-}
-
-model Customer {
-  id        String   @id @default(uuid())
-  name      String?
-  email     String   @unique
-  user      User     @relation(fields: [email], references: [email])
-  avatar    String?
-  address   String?
-  gender    Gender?
-  isDeleted Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("customer")
-}
-
-enum Gender {
-  MALE
-  FEMALE
-}
-
-enum userRole {
-  ADMIN
-  CUSTOMER
-}
-
-enum userStatus {
-  ACTIVE
-  BLOCKED
-  DELETED
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
 }
