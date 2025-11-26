@@ -21,4 +21,4 @@ const messageSchema = new mongoose.Schema<Tmessage>(
   { timestamps: true },
 );
 
-export const Message = mongoose.model<Tmessage>('message', messageSchema);
+export const MessageModel = mongoose.model<Tmessage>('message', messageSchema);

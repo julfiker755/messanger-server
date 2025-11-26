@@ -8,6 +8,8 @@ router.get(
   '/store',
   chatController.chatStoreBD
 );
+router.get("/all",chatController.getUserChatBD)
+router.get(":/id",chatController.getUserSingleChatBD)
 
 // router.post(
 //   '/change-password',
