@@ -3,6 +3,7 @@ import { userModel } from '../user/user.model';
 import { chatModel } from './chat.model';
 import { MessageModel } from '../message/message.model';
 
+//  ============ chatStoreBD ==============
 const chatStoreBD = async (userId: string, payload: any) => {
   const { participantsId, isGroup, participants, groupName, createdBy } =
     payload || {};
@@ -47,6 +48,7 @@ const chatStoreBD = async (userId: string, payload: any) => {
   return chat;
 };
 
+//  ================ getUserChatBD ===============
 const getUserChatBD = async (userId: string) => {
   const chats = await chatModel
     .find({
@@ -91,7 +93,11 @@ const getUserSingleChatBD = async (chatId: string, userId: string) => {
       path:"sender",
       select:"name avatar"
     }
-  })
+  }).sort({createdAt:-1})
+  return {
+    chat,
+    messages
+  }
 };
 
 export const chatService = {

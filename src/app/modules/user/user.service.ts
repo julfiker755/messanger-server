@@ -5,7 +5,6 @@ import { userModel } from './user.model';
 import { BcryptCompare } from '@/ulits';
 import config from '@/app/config';
 
-
 const userGetBD = async (query: Record<string, unknown>) => {
   const userQuery = new QueryBuilder(userModel.find(), query)
     .filter()
@@ -34,8 +33,6 @@ const userStoreBD = async (payload: any) => {
   return result;
 };
 
-
-
 const loginUserBD = async (payload: any) => {
   const { email, password } = payload;
   const result = await userModel.findOne({ email: email });
@@ -62,24 +59,22 @@ const loginUserBD = async (payload: any) => {
   }
   const payloadData = {
     email: result?.email,
+    id: result._id,
   };
   const accessToken = jwtHelpers.generateToken(
     payloadData,
     config.jwt.secret,
     config.jwt.accessTokenExp,
   );
- 
 
   return {
-    data:result,
-    accessToken
+    data: result,
+    accessToken,
   };
 };
-
-
 
 export const userService = {
   userGetBD,
   userStoreBD,
-  loginUserBD
+  loginUserBD,
 };

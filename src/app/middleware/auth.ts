@@ -5,14 +5,14 @@ import config from '../config';
 import ApiError from '../errors/apiError';
 import { jwtHelpers } from '../../helpers/jwtHelpers';
 
-const auth = (...roles: string[]) => {
+const auth = () => {
   return async (
     req: Request & { user?: any },
     res: Response,
     next: NextFunction,
   ) => {
     try {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization?.split(" ")[1]
       if (!token) {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
       }
@@ -20,11 +20,9 @@ const auth = (...roles: string[]) => {
         token,
         config.jwt.secret as Secret,
       );
+      console.log( varifyToken)
 
       req.user = varifyToken;
-      if (roles?.length && !roles.includes(varifyToken.role)) {
-        throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
-      }
       next();
     } catch (err) {
       if (err instanceof TokenExpiredError) {
