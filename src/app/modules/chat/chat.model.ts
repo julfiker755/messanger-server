@@ -23,8 +23,7 @@ const userSchema = new Schema<Tchat>(
       default: false,
     },
     groupName: {
-      type: String,
-      required: true,
+      type: String
     },
     createdBy: [
       {
